@@ -1,0 +1,32 @@
+{% if user %}
+	Hello,{{user}}!
+{% else %}
+	Hello,Stranger
+{% endif %}
+
+<ul>
+	{% for comment in comments %}
+		<li>{{comment}}</li>
+	{% endfor %}
+</ul>
+
+Jinja2还支持宏定义。类似于Python待命中的函数:
+{% macro render_comment(comment)%}
+	<li>{{comment}}</li>
+{%endmacro%}
+
+<ul>
+	{% for comment in comments %}
+		{{render_comment(comment)}}
+	{% endfor %}
+</ul>
+
+为了重复使用宏，我们可以将其保存在单独的文件中，然后在需要使用的模板中导入：
+{% import 'micro.html' as macros %}
+<ul>
+	{% for comment in comments %}
+		{{macros.render_comment(comment)}}
+	{% endfor %}
+</ul>
+需要在多处重复使用的模板代码块可以写入单独的文件，再包含在所有模板中，以避免重复：
+{% include 'common.html'%}

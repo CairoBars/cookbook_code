@@ -1,0 +1,18 @@
+1.
+	@decorator(x,y,z)
+	def func(a,b):
+		pass
+
+	塑钢泥的调用相当于下面这样写：
+	func=decorator(x,y,z)(func)
+
+
+2.
+	每个函数允许使用nonlocal来修改函数内部的变量
+
+
+3.
+	@logged(logging.DEBUG)
+	def add(x,y):
+		return x+y
+	这么写的时候，即使不显示调用add(x,y),也会自动运行里面的装饰器
